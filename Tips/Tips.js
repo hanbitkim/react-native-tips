@@ -44,7 +44,7 @@ const getArrowStyleByPosition = (position = 'top') => {
       borderBottomWidth: 5,
       borderLeftColor: 'transparent',
       borderRightColor: 'transparent',
-      borderBottomColor: 'rgba(0, 0, 0, 0.5)'
+      borderBottomColor: 'white'
     }
 
     default: return {
@@ -63,19 +63,12 @@ const getArrowStyleByPosition = (position = 'top') => {
 
 const TooltipArrow = styled.View`
   position: absolute;
-  shadow-radius: 1px;
-  shadow-color: black;
-  shadow-opacity: 0.5;
 `
 
 const Tooltip = styled.View`
-  background: rgba(0, 0, 0, 0.5);
+  background: white;
   flex: -1;
   padding: 10px;
-  border-radius: 4px;
-  shadow-radius: 1px;
-  shadow-color: black;
-  shadow-opacity: 0.5;
 `
 
 const ModalContent = styled.View`
@@ -108,7 +101,7 @@ const styles = StyleSheet.create({
   },
 
   modal: {
-    backgroundColor: 'rgba(0, 0, 0, 0.6)',
+    backgroundColor: 'rgba(0, 0, 0, 0.8)',
     position: 'relative',
     flex: 1
   },
@@ -297,7 +290,7 @@ export default class Tips extends PureComponent {
 
         case 'bottom':
           nextState.tooltipLeft = Math.max(-componentLeft, (componentWidth / 2) - (width / 2))
-          nextState.tooltipTop = 10
+          nextState.tooltipTop = 20
           break
 
         case 'top':
@@ -399,6 +392,7 @@ export default class Tips extends PureComponent {
                 <View
                   onLayout={this.handleTooltipLayout}
                   style={[styles.tooltipContainer, {
+                    width: this.props.width || width,
                     top: tooltipTop,
                     left: tooltipLeft
                   }, tooltipContainerStyle]}

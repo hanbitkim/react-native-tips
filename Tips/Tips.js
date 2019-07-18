@@ -165,8 +165,7 @@ export default class Tips extends PureComponent {
        * Check if the component is ready
        * @type {Boolean}
        */
-      ready: false,
-      handleTooltipLayoutCalled: false
+      ready: false
     }
 
     this.view = null
@@ -276,7 +275,7 @@ export default class Tips extends PureComponent {
       const {
         componentLeft, componentTop, componentWidth, componentHeight
       } = state
-      const nextState = {handleTooltipLayout: true}
+      const nextState = {}
 
       switch (position) {
         case 'right':
@@ -399,7 +398,6 @@ export default class Tips extends PureComponent {
                     left: tooltipLeft
                   }, tooltipContainerStyle]}
                 >
-                  {this.state.handleTooltipLayout &&
                   <Tooltip
                     style={style}
                   >
@@ -410,7 +408,7 @@ export default class Tips extends PureComponent {
                         style={[getArrowStyleByPosition(position), tooltipArrowStyle]}
                       />
                     )}
-                  </Tooltip>}
+                  </Tooltip>
                 </View>
               </ModalContent>
 

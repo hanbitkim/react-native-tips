@@ -32,7 +32,7 @@ const getArrowStyleByPosition = (position = 'top') => {
       borderBottomWidth: 5,
       borderTopColor: 'transparent',
       borderBottomColor: 'transparent',
-      borderLeftColor: 'rgba(0, 0, 0, 0.5)'
+      borderLeftColor: 'white'
     }
 
     case 'bottom': return {
@@ -165,7 +165,8 @@ export default class Tips extends PureComponent {
        * Check if the component is ready
        * @type {Boolean}
        */
-      ready: false
+      ready: false,
+      handleTooltipLayoutCalled: false
     }
 
     this.view = null
@@ -275,7 +276,7 @@ export default class Tips extends PureComponent {
       const {
         componentLeft, componentTop, componentWidth, componentHeight
       } = state
-      const nextState = {}
+      const nextState = {handleTooltipLayout: true}
 
       switch (position) {
         case 'right':
@@ -285,7 +286,7 @@ export default class Tips extends PureComponent {
 
         case 'left':
           nextState.tooltipTop = Math.max(-componentTop, (componentHeight / 2) - (height / 2))
-          nextState.tooltipLeft = -componentLeft - width - 10
+          nextState.tooltipLeft = -componentWidth - width - 10
           break
 
         case 'bottom':
@@ -393,10 +394,12 @@ export default class Tips extends PureComponent {
                   onLayout={this.handleTooltipLayout}
                   style={[styles.tooltipContainer, {
                     width: this.props.width || width,
+                    height: this.props.height,
                     top: tooltipTop,
                     left: tooltipLeft
                   }, tooltipContainerStyle]}
                 >
+                  {this.state.handleTooltipLayout &&
                   <Tooltip
                     style={style}
                   >
@@ -407,7 +410,7 @@ export default class Tips extends PureComponent {
                         style={[getArrowStyleByPosition(position), tooltipArrowStyle]}
                       />
                     )}
-                  </Tooltip>
+                  </Tooltip>}
                 </View>
               </ModalContent>
 
